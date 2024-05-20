@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Mintype"]
 description = "A simple Rust crate to verify email addresses."
-repository = "https://github.com/Mintype/"
+repository = "https://github.com/Mintype/email-verifier"
 license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
