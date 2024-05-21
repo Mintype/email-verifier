@@ -1,6 +1,6 @@
 [package]
 name = "email-verifier"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Mintype"]
 description = "A simple Rust crate to verify email addresses."
