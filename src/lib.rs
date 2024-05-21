@@ -40,3 +40,16 @@ pub fn fetch_email_data(email: &str) -> Result<ApiResponse, Box<dyn StdError>> {
         Err(Box::from(format!("HTTP request failed with status: {}", response.status())))
     }
 }
+
+pub fn get_domain_from_email(email: &str) -> Option<&str> {
+    if let Some(domain) = email.split('@').nth(1) {
+        if domain.is_empty() {
+            None
+        } else {
+            Some(domain)
+        }
+    } else {
+        None
+    }
+}
+
