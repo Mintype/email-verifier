@@ -23,7 +23,7 @@ Add `rust-translate` and `tokio` to your `Cargo.toml` file:
 
 ```toml
 [dependencies]
-email-verifier = "0.1.3"
+email-verifier = "0.1.4"
 ```
 
 Add the latest version of `email-verifier` with `cargo add email-verifier`.
