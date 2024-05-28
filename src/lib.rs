@@ -3,6 +3,7 @@ use reqwest::Error;
 use serde::Deserialize;
 use std::error::Error as StdError;
 
+/// Represents the data structure of the response from the email validation API.
 #[derive(Deserialize, Debug)]
 pub struct ResponseData {
     pub email_address: String,
@@ -16,12 +17,33 @@ pub struct ResponseData {
     pub spam: bool,
 }
 
+/// Represents the API response structure.
 #[derive(Deserialize, Debug)]
 pub struct ApiResponse {
     pub status: String,
     pub data: ResponseData,
 }
 
+/// Fetches email validation data from the given API for a specified email address.
+///
+/// # Arguments
+///
+/// * `email` - A string slice that holds the email address to validate.
+///
+/// # Returns
+///
+/// * `Ok(ApiResponse)` if the request is successful and the response can be parsed.
+/// * `Err(Box<dyn StdError>)` if there is an error with the request or parsing the response.
+///
+/// # Example
+///
+/// ```
+/// let email = "example@example.com";
+/// match fetch_email_data(email) {
+///     Ok(api_response) => println!("{:?}", api_response),
+///     Err(e) => println!("Error: {}", e),
+/// }
+/// ```
 pub fn fetch_email_data(email: &str) -> Result<ApiResponse, Box<dyn StdError>> {
     let url = format!("https://api.eva.pingutil.com/email?email={}", email);
 
@@ -41,6 +63,27 @@ pub fn fetch_email_data(email: &str) -> Result<ApiResponse, Box<dyn StdError>> {
     }
 }
 
+/// Extracts the domain from an email address.
+///
+/// # Arguments
+///
+/// * `email` - A string slice that holds the email address.
+///
+/// # Returns
+///
+/// * `Some(&str)` containing the domain if the email contains a valid domain.
+/// * `None` if the email does not contain a valid domain.
+///
+/// # Example
+///
+/// ```
+/// let email = "example@example.com";
+/// if let Some(domain) = get_domain_from_email(email) {
+///     println!("Domain: {}", domain);
+/// } else {
+///     println!("Invalid email address");
+/// }
+/// ```
 pub fn get_domain_from_email(email: &str) -> Option<&str> {
     if let Some(domain) = email.split('@').nth(1) {
         if domain.is_empty() {
@@ -52,4 +95,3 @@ pub fn get_domain_from_email(email: &str) -> Option<&str> {
         None
     }
 }
-
